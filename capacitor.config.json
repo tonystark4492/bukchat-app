@@ -1,0 +1,13 @@
+{
+  "appId": "io.github.tonystark4492.bukchat",
+  "appName": "BUKCHAT",
+  "webDir": "www",
+  "backgroundColor": "#0b0b0b",
+  "server": {
+    "url": "https://tonystark4492.github.io/bukchat/",
+    "androidScheme": "https",
+    "cleartext": false,
+    "allowNavigation": ["tonystark4492.github.io"]
+  },
+  "android": { "backgroundColor": "#0b0b0b" }
+}
