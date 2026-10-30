@@ -16,6 +16,26 @@ assert key in s
 s=s.replace(key,key+"\n"+add,1)
 open(p,"w").write(s)
 PY
+# resize the app window when the keyboard opens (so the chat is not hidden behind it)
+python3 - <<'PY'
+p="android/app/src/main/AndroidManifest.xml"
+s=open(p).read()
+key='android:launchMode="singleTask"'
+assert key in s
+if "windowSoftInputMode" not in s:
+    s=s.replace(key,key+'\n            android:windowSoftInputMode="adjustResize"',1)
+open(p,"w").write(s)
+PY
+# keyboard: make the app window shrink when the keyboard opens (so the chat stays visible)
+python3 - <<'PY'
+p="android/app/src/main/AndroidManifest.xml"
+s=open(p).read()
+key='android:launchMode="singleTask"'
+assert key in s
+if "windowSoftInputMode" not in s:
+    s=s.replace(key,key+'\n            android:windowSoftInputMode="adjustResize"',1)
+open(p,"w").write(s)
+PY
 # use our fixed signing key so every build can update the installed app
 mkdir -p ~/.android
 cp keystore/debug.keystore ~/.android/debug.keystore
