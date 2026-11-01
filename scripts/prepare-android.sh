@@ -36,6 +36,16 @@ if "windowSoftInputMode" not in s:
     s=s.replace(key,key+'\n            android:windowSoftInputMode="adjustResize"',1)
 open(p,"w").write(s)
 PY
+# ---- voice messages: allow the microphone ----
+python3 - <<'PY'
+p="android/app/src/main/AndroidManifest.xml"
+s=open(p).read()
+for perm in ("android.permission.RECORD_AUDIO","android.permission.MODIFY_AUDIO_SETTINGS"):
+    if perm not in s:
+        i=s.index("</manifest>")
+        s=s[:i]+'    <uses-permission android:name="'+perm+'" />\n'+s[i:]
+open(p,"w").write(s)
+PY
 # ---- notification extras: soft chime, silent sound and status-bar icon (made here, no files to upload) ----
 python3 - <<'PY'
 import wave, struct, math, base64, os
